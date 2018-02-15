@@ -1,0 +1,2 @@
+&self must be mutable in any function that wishes to modify self's members.
+Also, the struct instance must be mutable in order to call such a function.

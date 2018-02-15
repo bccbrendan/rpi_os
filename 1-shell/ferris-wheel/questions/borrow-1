@@ -1,0 +1,2 @@
+Can't move out of a borrowed reference. make MyType copyable.
+Note, also needed to make it Clone'able.

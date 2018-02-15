@@ -1,0 +1,12 @@
+
+a::MyType doesn't seem to have 'foo'. the compiler helps here.
+The trait is implemented, but not in scope. need to explicitly use it.
+
+run-pass:
+Seconds, Minutes, Milliseconds aren't used.
+add use Duraction::Minutes
+
+next, there's no comparison operators defined between the different duration types.
+so add one with a big match to handle all the combos of variants.
+
+A bit too length with this one.

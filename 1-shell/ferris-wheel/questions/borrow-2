@@ -1,0 +1,7 @@
+Add Copy, Clone to MyType so we can assign
+y as x without moving x.
+
+That lets us use x in the last line.
+
+Then make y = x to clone x, and
+take y = &y to match the assertions's type expectionss.

@@ -1,0 +1,4 @@
+read the TRPL section on universal function call syntax
+
+Foo::foo(&dummy)
+is almost like dummy.foo(), but we get to pick the implemenation

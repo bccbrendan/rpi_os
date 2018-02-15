@@ -1,0 +1,2 @@
+Make it clear to compiler that T has 'a lifetime bound in struct declaration.
+Also add lifetime explicitly to impl of inner so that return type isn't assumed to be '&self.

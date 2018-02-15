@@ -1,0 +1,2 @@
+need to make the &self reference mutable in order to change members.
+also need to make x mutable in order to call mutating functions.

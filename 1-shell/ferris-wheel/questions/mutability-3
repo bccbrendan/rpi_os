@@ -1,0 +1,18 @@
+the pattern variable 'string' only lives within the lifetime of the match expr.
+Not long enough to be returned.
+
+So we use the 'ref' keyword to make it explicit that the pattern is looking for string references.
+(this one took me way too long. need to review the 'ref' keyword and its uses.
+
+ref is similar to &, but can be used in bindings
+
+equivalent:
+let ref a = 2;
+let a = &2;
+(type &i32)
+
+equivalent:
+let r = &1
+let &a = r;
+let a = *r;
+(type i32)

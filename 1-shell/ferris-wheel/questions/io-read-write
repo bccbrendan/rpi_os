@@ -1,0 +1,6 @@
+Need to tell impl that we're going to implement for a generic type,
+so impl<T>, not just impl. Also, 'read' doesn't exist for generic T, so
+bound with 'impl<T: io::Read>>'
+
+Finally, Result type should have variants of usize _and_ std::io::Error
+

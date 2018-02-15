@@ -1,0 +1,9 @@
+In assignment 0, you enabled GPIO pin 16 as an output and then repeatedly set and cleared it by writing 
+to registers GPFSEL1, GPSET0, and GPCLR0. 
+Which three registers would you write to to do the same for GPIO pin 27? 
+Which physical pin on the Raspberry Pi maps to GPIO pin 27?
+
+I'd write to bits 23-21 of the GPIOFSEL2 register to enable the output.
+I'd still use GPSET0 and GPCLR0 (bit 27) to set and clear.
+
+It looks like pin 13 maps to GPIO pin 27, according to https://pinout.xyz/pinout/pin13_gpio27#

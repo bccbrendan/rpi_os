@@ -1,0 +1,5 @@
+You have to #[derive(Debug)] a struct/enum to print it out
+with {:?}
+Also, need to derive Copy in order to assign it to two different other variables.
+(reminder to self, assignment is move by default in rust, and if Copy is derived and it's called for, it'll be used.)
+Finally, we need to derive Clone in order to derive Copy in this case.

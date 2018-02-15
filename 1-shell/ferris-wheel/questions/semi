@@ -1,0 +1,5 @@
+the semicolon ends the statement,
+i think this means the next statement is used as the return value.
+which is nothing, so '()' is the type.
+
+remove the ';'

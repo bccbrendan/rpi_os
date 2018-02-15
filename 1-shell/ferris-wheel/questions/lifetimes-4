@@ -1,0 +1,5 @@
+Add lifetime generic arg to RefWrapper and RefWrapperWrapper and set up lifetime relationships.
+':' kind of means 'supercedes' or 'implies'
+
+Add all lifetime and type parameters to the 'impl' keyword and typename
+at the top of the impl block

@@ -1,0 +1,15 @@
+First we need the 'default' function, associated with Builder
+
+adding assignment methods to 'string' and 'number' methods
+get rid of a few compile errors.
+
+then we need to make to_string,
+which prints one field if only one field is populated,
+else both with a space in the middle.
+Using a tuple-match pattern here cut the size 
+of the code changes down to the 30 line budget
+
+Needed to play around with the & and ref a lot
+in the match case in to_string.
+
+

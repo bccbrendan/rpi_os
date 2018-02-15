@@ -1,0 +1,3 @@
+Rust's lifetype elision rules make the default lifetime of inner's return value the same as &selfs.
+In this case, the str that StrWrapper wraps outlives StrWrapper.
+So we make explicit that inner returns something with that longer lifetime.

@@ -1,0 +1,2 @@
+a const var can't be assigned a non-const result.
+So make 'add' const.

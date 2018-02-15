@@ -1,0 +1,5 @@
+IntWrapper only knows how to wrap isize values.
+also, there's no max function, and we can't use 'std::cmp::max'
+
+we need a generic max function, using 
+T where T:PartialOrd

@@ -1,0 +1,9 @@
+add lifetime template parameter to RefWrapper (so T doesn't have lifetime of Wrapper.)
+
+Then, 
+'a is the lifetime of T
+'b is lifetime of Wrapper
+and WrapperWrapper's lifetime isn't named.
+
+We must make it clear that a > b > 'WrapperWrapper.
+so declare 'b, declare 'a and that 'a implies 'b

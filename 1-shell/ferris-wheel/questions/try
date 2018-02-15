@@ -1,0 +1,6 @@
+Ok expects a u16, u32 signature, not Results.
+So first, add the '?' postfix to indicate we should return the ErrorA or ErrorB as the return value, if they're seen.
+Then the u16 or u32 values will be used for Ok if there's no error.
+
+Next problem is that there's no converter from ErrorA to Error, so implement std::convert::From 
+for 'Error' for both of the ErrorA/B variants.
