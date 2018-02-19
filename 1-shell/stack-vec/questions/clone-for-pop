@@ -1,0 +1,2 @@
+We can only pop Clone'able objects because we can't give ownership of the object's memory to the caller of pop.
+We can't move the memory ownership because the memory is statically pre-allocated, so we don't want pop's caller dropping it.

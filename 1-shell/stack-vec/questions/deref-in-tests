@@ -1,0 +1,8 @@
+Tests that fail if deref isn't implemented include:
+- assignment_test_example (for use of '*v'
+- index_oob (since deref is needed for [0] indexing
+- index_oob_after_truncate (same as above)
+
+it seems like pretty much all the tests
+rely on Deref, since it impacts the availability of 
+'iter' and indexing.

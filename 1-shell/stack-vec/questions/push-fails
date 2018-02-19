@@ -1,0 +1,3 @@
+stackVec::push() can fail because StackVec has a hard limit on how much memory it can use.
+Vec can practically grow infinitely: if the OS can't allocate any more memory, we'll panic, but
+that's an OS concern, not a Vec concern.

@@ -1,0 +1,3 @@
+The rejected declaration is one of a slice that may outlive its referenced elements.
+We don't want a dangling pointer if a slice element is dropped before the slice itself is dropped.
+Therefore, 'T: 'a' ensures that each element lives at least as long as the slice of elements.
