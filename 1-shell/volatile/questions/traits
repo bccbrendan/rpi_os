@@ -1,0 +1,6 @@
+Traits allow for code decoupling: a client of a module could rely
+only one some traits of that module and have the freedom to use a different
+module implementing the same traits.
+
+Unlike inherrited methods, traits can be statically dispatched.
+This means less runtime costs, as the compiler has found the concrete function implementation for us already.

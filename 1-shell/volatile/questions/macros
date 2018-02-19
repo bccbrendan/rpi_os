@@ -1,0 +1,8 @@
+readable! adds an impl Trait for Readable for the ReadVolatile, Volatile, and UniqueVolatile structs.
+It's nice to use this macro, because the impl trait is nearly identical and repeated 3 times.
+It's also error-prone, with all the type contraints, etc.
+Finally, it implements the inner function for each of these types.
+
+writable! is very similar, but with different type constraints.
+
+readable_writable! doesn't add any fn definitions, but does contrain types.

@@ -1,0 +1,5 @@
+The Readable trait returns a const pointer for inner, which can't be written to.
+It also lacks a 'write' function.
+
+The Writable trait doesn't have a 'read' function.
+And it's inner function returns a copy of the pointer (which I think could still be used to read, but only unsafely.)

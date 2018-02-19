@@ -1,0 +1,2 @@
+UniqueVolatile's ptr must be the only accessible mutable reference.
+Meaning UniqueVolatile is the only thing that can write to its referenced ptr.

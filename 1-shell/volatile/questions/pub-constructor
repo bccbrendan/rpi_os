@@ -1,0 +1,1 @@
+'new' is marked unsafe, but there's no way to mark a struct member 'unsafe'.

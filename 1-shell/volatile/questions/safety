@@ -1,0 +1,7 @@
+New takes an unsafe raw pointer and returns a safe *Volatile type.
+that's inherrently an unsafe transformation. (we can't magically safely transform unsafe things into safe things)
+
+Read and Write are safe operations at their interfaces
+(they're not turning anything unsafe into something 'safe', they don't
+deal with unsafe inputs.). But their implementations are unsafe, since
+they manipulate raw pointers, which may point to invalid memory.
