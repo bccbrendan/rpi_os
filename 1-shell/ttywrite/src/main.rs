@@ -7,7 +7,7 @@ use std::path::PathBuf;
 use std::time::Duration;
 
 use structopt::StructOpt;
-use serial::core::{CharSize, BaudRate, StopBits, FlowControl, SerialDevice, SerialPortSettings};
+use serial::core::{CharSize, BaudRate, StopBits, FlowControl};
 use xmodem::{Xmodem, Progress};
 
 mod parsers;
@@ -47,12 +47,45 @@ struct Opt {
     raw: bool,
 }
 
+fn configure_port(port: &mut serial::SerialPort, opt: &Opt) -> serial::Result<()> {
+    port.set_timeout(Duration::from_secs(opt.timeout))?;
+    port.reconfigure(&|settings| {
+        settings.set_char_size(opt.char_width);
+        settings.set_parity(serial::ParityNone);
+        settings.set_stop_bits(opt.stop_bits);
+        settings.set_flow_control(opt.flow_control);
+        settings.set_baud_rate(opt.baud_rate)
+    })
+}
+
+fn progress(p: Progress) {
+    match p {
+        Progress::Waiting => println!("Waiting for NAK..."),
+        Progress::Started => println!("Starting download"),
+        Progress::Packet(n) => println!("Packet {}", n),
+    }
+}
+
 fn main() {
     use std::fs::File;
-    use std::io::{self, BufReader, BufRead};
+    use std::io;
 
     let opt = Opt::from_args();
-    let mut serial = serial::open(&opt.tty_path).expect("path points to invalid TTY");
+    let mut port = serial::open(&opt.tty_path).expect("path points to invalid TTY");
+    configure_port(&mut port, & opt).unwrap();
 
-    // FIXME: Implement the `ttywrite` utility.
+    let mut input: Box<io::Read> = match opt.input {
+        Some(p) => {
+            Box::new(File::open(p).unwrap())
+        }
+        None => {
+            Box::new(io::stdin())
+        }
+    };
+
+    if opt.raw {
+        io::copy(&mut input, &mut port).unwrap();
+    } else {
+        Xmodem::transmit_with_progress(input, port, progress).unwrap();
+    }
 }

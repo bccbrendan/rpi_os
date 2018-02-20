@@ -1,0 +1,1 @@
+structopt reuses the enum string parsing logic of the types that are tied to each option.

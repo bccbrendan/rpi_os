@@ -1,0 +1,2 @@
+The tests don't cover the xmodem transmission use-case, probably 
+because it's harder to write a test harness that implements the xmodem protocol (with messages send from downloader, etc)
