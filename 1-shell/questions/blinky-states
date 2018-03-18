@@ -1,0 +1,2 @@
+In assignment 0, we transitioned from the start state to the output state.
+We then alternated between the SET and CLR edges to cycle back to the OUTPUT state.

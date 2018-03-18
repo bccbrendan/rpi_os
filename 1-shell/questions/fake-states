@@ -1,0 +1,8 @@
+If a client picked the wrong starting state, they could
+wind up reading from an output pin or driving an input pin.
+
+This would probably appear as a hard-to-find runtime error.
+Users might spend time debugging the hardware and circuits.
+Possibly this could also damage hardware, but I'm guessing that 
+there are protections in place so that writing to an input
+doesn't burn out a GPIO.

@@ -4,7 +4,6 @@
 #![feature(asm)]
 #![feature(optin_builtin_traits)]
 #![feature(decl_macro)]
-#![feature(repr_align)]
 #![feature(attr_literals)]
 #![feature(never_type)]
 #![feature(ptr_internals)]
@@ -17,7 +16,27 @@ pub mod mutex;
 pub mod console;
 pub mod shell;
 
+use pi::gpio::Gpio;
+use pi::timer::spin_sleep_ms;
+
 #[no_mangle]
 pub extern "C" fn kmain() {
+    let pins = &mut [
+        Gpio::new(5).into_output(),
+        Gpio::new(6).into_output(),
+        Gpio::new(13).into_output(),
+        Gpio::new(16).into_output(),
+        Gpio::new(19).into_output(),
+        Gpio::new(26).into_output(),
+    ];
+    let mut i = 0;
+    loop {
+        pins[i].set();
+        spin_sleep_ms(500);
+        pins[i].clear();
+        spin_sleep_ms(500);
+        i = (i + 1) % pins.len();
+    }
     // FIXME: Start the shell.
 }
+
