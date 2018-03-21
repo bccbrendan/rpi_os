@@ -18,6 +18,8 @@ pub mod shell;
 
 use pi::gpio::Gpio;
 use pi::timer::spin_sleep_ms;
+use pi::uart::MiniUart;
+use std::fmt::Write;
 
 #[no_mangle]
 pub extern "C" fn kmain() {
@@ -29,14 +31,14 @@ pub extern "C" fn kmain() {
         Gpio::new(19).into_output(),
         Gpio::new(26).into_output(),
     ];
+    let mut uart = MiniUart::new();
     let mut i = 0;
     loop {
         pins[i].set();
-        spin_sleep_ms(500);
+        let byte = uart.read_byte();
         pins[i].clear();
-        spin_sleep_ms(500);
+        uart.write_byte(byte);
         i = (i + 1) % pins.len();
     }
-    // FIXME: Start the shell.
 }
 

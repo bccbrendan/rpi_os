@@ -1,0 +1,6 @@
+Our code enforces the read-only property by declaring
+the timer CL0 and CHI registers as ReadVolatile, not WriteVolatile.
+
+This means they don't implement
+the Writeable trate, so
+they don't have a 'write' function.
