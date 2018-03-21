@@ -1,0 +1,4 @@
+I guess it write_fmt calls impl fmt::Write for Console {
+    fn write_str(
+
+

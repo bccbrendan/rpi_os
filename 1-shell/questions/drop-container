@@ -1,0 +1,3 @@
+If we returned a mutable reference raw, then that reference could outlive the thing it references.
+It'd then point to invalid memory -- causing difficult to solve bugs like stack corruptions, etc.
+we'd be lucky to get a segfault.

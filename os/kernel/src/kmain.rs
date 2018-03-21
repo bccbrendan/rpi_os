@@ -20,6 +20,7 @@ use pi::gpio::Gpio;
 use pi::timer::spin_sleep_ms;
 use pi::uart::MiniUart;
 use std::fmt::Write;
+use console::{kprint, kprintln};
 
 #[no_mangle]
 pub extern "C" fn kmain() {
@@ -35,9 +36,11 @@ pub extern "C" fn kmain() {
     let mut i = 0;
     loop {
         pins[i].set();
-        let byte = uart.read_byte();
+        // let byte = uart.read_byte();
+        // uart.write_byte(byte);
+        spin_sleep_ms(500);
         pins[i].clear();
-        uart.write_byte(byte);
+        kprintln!("Hello, world!");
         i = (i + 1) % pins.len();
     }
 }
