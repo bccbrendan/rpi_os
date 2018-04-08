@@ -13,14 +13,15 @@ extern crate stack_vec;
 
 pub mod lang_items;
 pub mod mutex;
+#[macro_use]
 pub mod console;
 pub mod shell;
 
 use pi::gpio::Gpio;
-use pi::timer::spin_sleep_ms;
-use pi::uart::MiniUart;
-use std::fmt::Write;
-use console::{kprint, kprintln};
+//use pi::timer::spin_sleep_ms;
+//use pi::uart::MiniUart;
+//use std::fmt::Write;
+//use console::{kprint, kprintln};
 
 #[no_mangle]
 pub extern "C" fn kmain() {
@@ -32,7 +33,10 @@ pub extern "C" fn kmain() {
         Gpio::new(19).into_output(),
         Gpio::new(26).into_output(),
     ];
-    let mut uart = MiniUart::new();
+    pins[0].set();
+    shell::shell("> ");
+
+    /*
     let mut i = 0;
     loop {
         pins[i].set();
@@ -43,5 +47,6 @@ pub extern "C" fn kmain() {
         kprintln!("Hello, world!");
         i = (i + 1) % pins.len();
     }
+    */
 }
 

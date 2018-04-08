@@ -1,5 +1,6 @@
 use stack_vec::StackVec;
 use console::{kprint, kprintln, CONSOLE};
+use std::str;
 
 /// Error type for `Command` parse failures.
 #[derive(Debug)]
@@ -40,8 +41,67 @@ impl<'a> Command<'a> {
     }
 }
 
+fn _print_splash() {
+    kprintln!(r##"      ___         ___           ___     "##);
+    kprintln!(r##"     /  /\       /  /\         /  /\    "##);
+    kprintln!(r##"    /  /::\     /  /::\       /  /:/_   "##);
+    kprintln!(r##"   /  /:/\:\   /  /:/\:\     /  /:/ /\  "##);
+    kprintln!(r##"  /  /:/~/:/  /  /:/  \:\   /  /:/ /::\ "##);
+    kprintln!(r##" /__/:/ /:/  /__/:/ \__\:\ /__/:/ /:/\:\"##);
+    kprintln!(r##" \  \:\/:/   \  \:\ /  /:/ \  \:\/:/~/:/"##);
+    kprintln!(r##"  \  \::/     \  \:\  /:/   \  \::/ /:/ "##);
+    kprintln!(r##"   \  \:\      \  \:\/:/     \__\/ /:/  "##);
+    kprintln!(r##"    \  \:\      \  \::/        /__/:/   "##);
+    kprintln!(r##"     \__\/       \__\/         \__\/    "##);
+}
+
+fn _bell() {
+    kprint!("\x07");
+}
+
+fn _backspace() {
+    // backspace, print space, backspace again
+    kprint!("\x08 \x08");
+}
+
+fn _read_line<'a>(mut storage: &'a mut [u8]) -> &'a str {
+    { // scope to borry storage
+        let max_len = storage.len();
+        let mut line = StackVec::<u8>::new(&mut storage);
+        loop {
+            let byte = CONSOLE.lock().read_byte();
+            match byte {
+                printable @ 32 ... 126 | printable @ 128 ... 255 => {
+                    if line.len() < max_len {
+                        kprint!("{}", printable as char);
+                        line.push(printable).unwrap();
+                    } else {
+                        _bell();
+                    }
+                }
+                b'\r' | b'\n' => {
+                     kprintln!("");
+                     break
+                }
+                8 | 127 => {
+                    if line.len() > 0 {
+                        _backspace();
+                    }
+                }
+                _ => _bell()
+            }
+        }
+    }
+    return str::from_utf8(&storage[0..storage.len()]).unwrap();
+}
+
 /// Starts a shell using `prefix` as the prefix for each line. This function
 /// never returns: it is perpetually in a shell loop.
 pub fn shell(prefix: &str) -> ! {
-    unimplemented!()
+    _print_splash();
+    loop {
+        kprint!("{}", prefix);
+        let mut storage = [0u8; 512];
+        let input_line = _read_line(&mut storage);
+    }
 }
